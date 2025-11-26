@@ -1,0 +1,15 @@
+#connect4Buttons{
+    display: grid;
+    grid-template-columns: repeat(7, 85px);
+    grid-template-rows: repeat(1, 85px);
+    grid-gap: 0px;
+    justify-content: center;
+}
+
+#connect4Grid{
+    display: grid;
+    grid-template-columns: repeat(7, 85px);
+    grid-template-rows: repeat(6, 85px);
+    grid-gap: 0px;
+    justify-content: center;
+}
