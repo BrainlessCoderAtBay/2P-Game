@@ -7,12 +7,15 @@ const connect4Grid = gridType.rows.map(row => gridType.cols.map(col => undefined
 
 const grid = document.getElementById("connect4Grid");
 const buttons = document.getElementById("connect4Buttons");
-const beginButton = document.getElementById("playConnect4");
+const beginButton = document.getElementById("beginConnect4");
 const resetButton = document.getElementById("resetConnect4");
 const winnerGame = document.getElementById("winnerGame");
 const bConnect4 = document.getElementById("beginConnect4");
+const connect4Background = document.getElementById("connect4Background")
 
 //----PLAYER VARIABLES----
+const player1 = document.getElementById("player_1")
+const player2 = document.getElementById("player_2")
 let cPlayerTurn = 0;
 let winner = null;
 let players = []
@@ -37,8 +40,7 @@ function setUpGame(){
         }
         buttons.appendChild(cell2)
     }
-
-    players = beginGame();
+    beginGame()
     bConnect4.style.pointerEvents = "none";
     document.getElementById("connect4Background").style.display = "grid"
     console.log(players);
@@ -46,10 +48,11 @@ function setUpGame(){
 
 
 function beginGame(){
-    const player1 = prompt("Enter player 1 name: ")
-    const player2 = prompt("Enter player 2 name: ")
+    let firstPlayer = player1.value
+    let secondPlayer = player2.value
     beginButton.style.display = "none";
-    return [player1,player2];
+
+    players = [firstPlayer,secondPlayer];
 }
 
 //----Reset Board----
@@ -232,16 +235,20 @@ function resetGame(){
     winnerGame.style.display = "none";
     winnerGame.innerHTML = "";
     resetButton.style.display = "none";
+    beginButton.style.display = "grid";
+    beginButton.style.pointerEvents = "auto";
+    player1.value = player2.value =  ""
     clearBoard();
-    setUpGame();
 }
 
 function clearBoard(){
+    connect4Background.style.display = "none";
     grid.replaceChildren();
     buttons.replaceChildren();
 }
-// remove begin button when starting the game and remove the board when you click next round
 
-//fixed div and then a fixed center for the winner
+
+
+//Quality of life
 
 
