@@ -8,12 +8,21 @@
     <title>Document</title>
 </head>
 <body>
-    <button id="playConnect4" onclick="setUpGame()">Begin</button>
+    <div id="beginConnect4">
+        <button id="playConnect4" onclick="setUpGame()">Begin</button>
+    </div>
+    
     <div id="connect4">
         <div id="connect4Buttons"></div>
         <br>
-        <div id="connect4Grid"></div>   
+        <div id="connect4Background">
+            <div id="connect4Grid"></div>   
+        </div>
+
     </div>
-    
+    <div id="winnerGame"></div>
+    <div id="resetConnect4">
+        <button id="resetButton" onclick="resetGame()">Reset Game</button>
+    </div>
 </body>
 </html>

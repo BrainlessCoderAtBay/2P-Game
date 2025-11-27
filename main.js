@@ -7,7 +7,10 @@ const connect4Grid = gridType.rows.map(row => gridType.cols.map(col => undefined
 
 const grid = document.getElementById("connect4Grid");
 const buttons = document.getElementById("connect4Buttons");
-
+const beginButton = document.getElementById("playConnect4");
+const resetButton = document.getElementById("resetConnect4");
+const winnerGame = document.getElementById("winnerGame");
+const bConnect4 = document.getElementById("beginConnect4");
 
 //----PLAYER VARIABLES----
 let cPlayerTurn = 0;
@@ -36,6 +39,8 @@ function setUpGame(){
     }
 
     players = beginGame();
+    bConnect4.style.pointerEvents = "none";
+    document.getElementById("connect4Background").style.display = "grid"
     console.log(players);
 }
 
@@ -43,8 +48,20 @@ function setUpGame(){
 function beginGame(){
     const player1 = prompt("Enter player 1 name: ")
     const player2 = prompt("Enter player 2 name: ")
+    beginButton.style.display = "none";
     return [player1,player2];
 }
+
+//----Reset Board----
+function resetConnect4Grid() {
+    for (let row = 0; row < gridType.rows.length; row++) {
+        for (let col = 0; col < gridType.cols.length; col++) {
+            connect4Grid[row][col] = undefined;
+        }
+    }
+}
+
+
 
 //----Game Mechanics----
 
@@ -73,9 +90,13 @@ function playerMove(column) {
 
     // Alert if there’s a winner
     if (vertical == "X" || horizontal === "X" || diagonal === "X") {
-        alert(`${players[0]} wins!`);
+        winnerGame.innerHTML = `${players[0]} wins!`;
+        winnerGame.style.display = "grid";
+        resetButton.style.display = "grid";
     }else if(vertical == "O" || horizontal === "O" || diagonal === "O"){
-        alert(`${players[1]} wins!`)
+        winnerGame.innerHTML =  `${players[1]} wins!`;
+        winnerGame.style.display = "grid";
+        resetButton.style.display = "grid";
     }
 }
 
@@ -156,6 +177,17 @@ function diagonalConnect4() {
 }
 
 
+function checkAvailSquare(){
+
+    let remainingTiles = 0;
+    
+    for (let x = 0 ; x < gridType.rows.length; x++){
+        for (let y = 0 ;y < gridType.cols.length; y++){
+            
+        }
+    }
+}
+
 //----Game Visuals----
 
 function updateSquareColor(){
@@ -181,15 +213,26 @@ function updateSquareColor(){
 }
 
 
-
-
-
-
-console.log(connect4Grid);
-
-
-
 //Make-function the removes the buttons after someone wins or if no more spaces are-left
 //the array
 
+function resetGame(){
+    resetConnect4Grid();
+
+    players = [];
+    winnerGame.style.display = "none";
+    winnerGame.innerHTML = "";
+    resetButton.style.display = "none";
+    clearBoard();
+    setUpGame();
+}
+
+function clearBoard(){
+    grid.replaceChildren();
+    buttons.replaceChildren();
+}
 // remove begin button when starting the game and remove the board when you click next round
+
+//fixed div and then a fixed center for the winner
+
+
