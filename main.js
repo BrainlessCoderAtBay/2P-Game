@@ -80,10 +80,11 @@ function playerMove(column) {
         }
     }
 
-    // Check vertical win
+    // Check situations
     let vertical = verticalConnect4(column);
     let horizontal = horizontalConnect4(placedRow);
     let diagonal = diagonalConnect4();
+    let freeSpace = checkAvailSquare();
 
     // Switch player turn
     cPlayerTurn = (cPlayerTurn === 0) ? 1 : 0;
@@ -95,6 +96,10 @@ function playerMove(column) {
         resetButton.style.display = "grid";
     }else if(vertical == "O" || horizontal === "O" || diagonal === "O"){
         winnerGame.innerHTML =  `${players[1]} wins!`;
+        winnerGame.style.display = "grid";
+        resetButton.style.display = "grid";
+    }else if(freeSpace === 0){
+        winnerGame.innerHTML =  `No one wins :(`;
         winnerGame.style.display = "grid";
         resetButton.style.display = "grid";
     }
@@ -180,12 +185,16 @@ function diagonalConnect4() {
 function checkAvailSquare(){
 
     let remainingTiles = 0;
-    
+
     for (let x = 0 ; x < gridType.rows.length; x++){
         for (let y = 0 ;y < gridType.cols.length; y++){
-            
+            if (connect4Grid[x][y] === undefined){
+                remainingTiles++
+            }
         }
     }
+
+    return remainingTiles;
 }
 
 //----Game Visuals----
